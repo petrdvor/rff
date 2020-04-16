@@ -1,6 +1,6 @@
 # %% COMSOFT REC file intial data analysis (rff format)
 
-with open("../data/rec181.rec", "rb") as f:
+with open("./data/sample.rec", "rb") as f:
 
     position = 0
     f.seek(position, 0)
@@ -38,7 +38,7 @@ with open("../data/rec181.rec", "rb") as f:
 # %%
 
 #181 P3D-WS cat20 TP1
-with open("../data/rec181.rec", "rb") as f:
+with open("../data/sample.rec", "rb") as f:
     pass
 
     position = 0
