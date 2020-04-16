@@ -1,0 +1,28 @@
+Formát REC souboru (Comsoft)
+ 
+•	Prvních 128 bajtů (tj. pro indexy [0] – [127])  je hlavička souboru (můžeš inicializovat mezerami, tj. bajty 0x20): 
+o	Od [1] je datum a čas začátku nahrávky (normálně ASCII znaky): MM/DD/YY hh:mm:ss
+o	Od [21] je datum a čas ukončení nahrávky: MM/DD/YY hh:mm:ss
+o	Zbytek hlavičky teď neumím rozepsat, už by tam nemělo být nic podstatného - ve zdrojácích mám každopádně tohle (neručím za to, že tam není něco špatně, ale fungovat to bude):
+ 
+                hdr[19] = 0x00; 
+                hdr[39] = 0x00;
+                hdr[52] = 0x00;
+                memset(hdr + 57, 0, 23);
+                hdr[87] = 0x00;
+                hdr[88] = 0x02;
+                hdr[89] = 0x03;
+                hdr[95] = 0x00;
+                hdr[96] = 0x01;
+                hdr[97] = 0x03;
+                hdr[114] = 0x00;               
+                hdr[120] = 0x00;
+                hdr[121] = 0x0E;
+                memset(hdr+122, 0, 4);
+                hdr[125] = 0x00;
+                hdr[126] = 0xA0;
+                hdr[127] = 0x00;
+ 
+•	Dál následují záznamy vlastních (binárních) dat ASTERIX, každý uvozený 6-bajtovou hlavičkou ([0] – [5]): 
+o	[0] – [3] = čas příjmu záznamu; milisekundy od začátku nahrávky (nejnižší bajt první)
+o	[4] – [5] = délka následujících ASTERIX dat v bajtech (nižší bajt první)
